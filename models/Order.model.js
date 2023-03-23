@@ -19,3 +19,7 @@ const ordersSchema = mongoose.Schema({
     ref: 'Client',
   },
 })
+
+const Order = mongoose.model('Order', ordersSchema)
+
+module.exports = Order

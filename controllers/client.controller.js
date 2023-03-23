@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken')
 const Client = require('../models/Client.model')
 
 const ClientsController = {
-  getAllUsers: async (req, res) => {
+  getAllClients: async (req, res) => {
     try {
       const clients = await Client.find()
       res.json(clients)
@@ -63,3 +63,6 @@ const ClientsController = {
     }
   },
 }
+
+
+module.exports = ClientsController
