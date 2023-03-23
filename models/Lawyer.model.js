@@ -14,7 +14,7 @@ const lawyersSchema = mongoose.Schema({
     unique: true,
     max: 20,
   },
-  number: {
+  phoneNumber: {
     type: String,
     required: true,
     unique: true,
@@ -23,6 +23,10 @@ const lawyersSchema = mongoose.Schema({
     type: String,
     required: true,
     min: 8,
+  },
+  orders: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Order',
   },
 })
 

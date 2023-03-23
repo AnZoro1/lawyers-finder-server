@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 app.use(require('./routes/client.route'))
-// app.use(require('./routes/lawyer.route'))
+app.use(require('./routes/lawyer.route'))
 app.use(require('./routes/order.route'))
 
 const { PORT, MONGO_DB } = process.env
