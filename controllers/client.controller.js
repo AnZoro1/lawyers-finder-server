@@ -14,7 +14,7 @@ const ClientsController = {
 
   registerClient: async (req, res) => {
     try {
-      const { clientName, email, phoneNumber, password, orders } = req.body
+      const { clientName, email, phoneNumber, password } = req.body
       const { BCRYPT_ROUNDS } = process.env
       const hash = await bcrypt.hash(password, Number(BCRYPT_ROUNDS))
 
@@ -23,7 +23,6 @@ const ClientsController = {
         email,
         phoneNumber,
         password: hash,
-        orders,
       })
 
       res.json(client)
@@ -40,7 +39,9 @@ const ClientsController = {
       const candidate = await Client.findOne({ clientName })
 
       if (!candidate) {
-        return res.status(401).json({ error: 'Неверный логин или пароль' })
+        return res
+          .status(401)
+          .json({ error: 'Неверный логин или пароль хахах' })
       }
 
       const valid = await bcrypt.compare(password, candidate.password)
@@ -57,12 +58,11 @@ const ClientsController = {
       const token = await jwt.sign(payload, SECRET_JWT_KEY, {
         expiresIn: '24h',
       })
-      res.json(token)
+      res.json({ token: token, client: candidate })
     } catch (err) {
       return res.json({ error: err.message })
     }
   },
 }
-
 
 module.exports = ClientsController

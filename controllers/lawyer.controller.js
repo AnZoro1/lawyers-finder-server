@@ -13,7 +13,7 @@ const LawyerController = {
   },
   lawyerRegister: async (req, res) => {
     try {
-      const { lawyerName, email, phoneNumber, password, orders } = req.body
+      const { lawyerName, email, phoneNumber, password } = req.body
 
       const { BCRYPT_ROUNDS } = process.env
 
@@ -24,7 +24,6 @@ const LawyerController = {
         email,
         phoneNumber,
         password: hash,
-        orders,
       })
       res.json(lawyer)
     } catch (err) {
@@ -55,7 +54,7 @@ const LawyerController = {
       const token = await jwt.sign(payload, SECRET_JWT_KEY, {
         expiresIn: '24h',
       })
-      res.json(token)
+      res.json({ token: token, lawyer: candidate })
     } catch (err) {
       return res.json({ error: err.message })
     }

@@ -27,7 +27,6 @@ const clientsSchema = mongoose.Schema({
   orders: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Order',
-    required: true,
   },
 })
 
