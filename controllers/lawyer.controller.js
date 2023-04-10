@@ -54,7 +54,22 @@ const LawyerController = {
       const token = await jwt.sign(payload, SECRET_JWT_KEY, {
         expiresIn: '24h',
       })
-      res.json({ token: token, lawyer: candidate })
+      res.json({ token: token, lawyer: candidate, id: candidate._id })
+    } catch (err) {
+      return res.json({ error: err.message })
+    }
+  },
+
+  updateLawyer: async (req, res) => {
+    try {
+      const order = await Lawyer.findByIdAndUpdate(
+        req.params.id,
+        {
+          orders: req.body.id,
+        },
+        { new: true }
+      )
+      res.json(order)
     } catch (err) {
       return res.json({ error: err.message })
     }

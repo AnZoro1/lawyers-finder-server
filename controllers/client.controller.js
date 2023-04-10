@@ -58,7 +58,7 @@ const ClientsController = {
       const token = await jwt.sign(payload, SECRET_JWT_KEY, {
         expiresIn: '24h',
       })
-      res.json({ token: token, client: candidate })
+      res.json({ token: token, client: candidate, id: candidate._id })
     } catch (err) {
       return res.json({ error: err.message })
     }
