@@ -61,15 +61,15 @@ const LawyerController = {
   },
 
   updateLawyer: async (req, res) => {
+    console.log(req.params.lawyerId, 'ccc')
     try {
-      const order = await Lawyer.findByIdAndUpdate(
-        req.params.id,
-        {
-          orders: req.body.id,
-        },
+      const lawyerWithOrder = await Lawyer.findByIdAndUpdate(
+        req.params.lawyerId,
+
+        { $push: { orders: req.body.id } },
         { new: true }
       )
-      res.json(order)
+      res.json(lawyerWithOrder)
     } catch (err) {
       return res.json({ error: err.message })
     }

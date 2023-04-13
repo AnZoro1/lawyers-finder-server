@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/auth.middleware')
 const router = Router()
 
 router.get('/lawyers', authMiddleware, LawyerController.getAllLawyers)
-router.patch('lawyers/:id', LawyerController.updateLawyer)
+router.patch('/lawyers/:lawyerId', LawyerController.updateLawyer)
 router.post('/authLawyer', LawyerController.lawyerRegister)
 router.post('/loginLawyer', LawyerController.loginLawyer)
 
